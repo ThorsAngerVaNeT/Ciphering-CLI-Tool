@@ -1,0 +1,24 @@
+{
+  "name": "caesar-cli",
+  "version": "1.0.0",
+  "description": "NodeJS RS School 2021Q4 Task 1 - Caesar Cipher CLI",
+  "main": "caesar-cli.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ThorsAngerVaNeT/Node.JS-RS-School-2021Q4.git"
+  },
+  "keywords": [
+    "caesar",
+    "cipher",
+    "cli"
+  ],
+  "author": "Vadzim Antonau",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ThorsAngerVaNeT/Node.JS-RS-School-2021Q4/issues"
+  },
+  "homepage": "https://github.com/ThorsAngerVaNeT/Node.JS-RS-School-2021Q4#readme"
+}
