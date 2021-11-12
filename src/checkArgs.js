@@ -1,26 +1,30 @@
+const { ArgRequiredError, ArgDuplicateError, IncorrectConfigError } = require('./errors.js');
+
 const allowedConfig = ['C0', 'C1', 'A', 'R0', 'R1'];
 const allowedArgs = ['-c', '--config', '-i', '--input', '-o', '--output'];
+const shortArgs = {'--config': '-c', '--input': '-i', '--output': '-o'};
 
-const simplifyArgs = (args) => {
-  args.forEach((element, index) => {
-    if(element.startsWith('--')) args[index] = '-' + element[2];
+const simplifyArgs = () => {
+  process.argv.forEach((element, index) => {
+    if(element.startsWith('--') && shortArgs[element]) process.argv[index] = shortArgs[element];
   });
-  return args;
 }
 
-const isArgsOk = (args, done) => {
-  args = simplifyArgs(args);
+const isArgsOk = () => {
+  simplifyArgs();
+  args = process.argv.slice(2);
   if(!args.includes('-c')){
-      return done(new Error('Config option (-c, --config) is required!'));
+      throw new ArgRequiredError('-c (--config)');
   }
 
   if((new Set(args)).size !== args.length){
-      return done(new Error('Duplicated options are not allowed!'));
+    throw new ArgDuplicateError();
   }
 
-  const configArr = getValue('-c').split('-');
+  const configVal = getValue('-c');
+  const configArr = configVal.indexOf('-') ? configVal.split('-') : configVal;
   if(!configArr.every(el => (allowedConfig.includes(el)))){
-    return done(new Error('Incorrect config definition!'));
+    throw new IncorrectConfigError();
   }
 }
 
@@ -29,4 +33,4 @@ const getValue = (flag) => {
   return flagIndex !== -1 ? process.argv[flagIndex + 1] : null;
 }
 
-module.exports = {isArgsOk}
+module.exports = { isArgsOk }
