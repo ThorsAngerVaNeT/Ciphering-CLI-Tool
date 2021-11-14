@@ -50,4 +50,4 @@ You can terminate tool by pressing Ctrl+C.
 > `This is secret. Message about "_" symbol!`
 
 > output.txt
-> `Myxn xn nbdobm. Tbnnfzb ferlm "\_" nhteru!
+> `Myxn xn nbdobm. Tbnnfzb ferlm "\_" nhteru!`
