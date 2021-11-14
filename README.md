@@ -35,6 +35,7 @@ Config is a mandatory option. It's a string with pattern {XY(-)}n, where:
 For example, config "C1-C1-R0-A" means "encode by Caesar cipher => encode by Caesar cipher => decode by ROT-8 => use Atbash"
 
 If the input file option is missed, then you should provide text in command line.
+
 If the output file option is missed, then tool will output proceded text to command line
 You can terminate tool by pressing Ctrl+C.
 
