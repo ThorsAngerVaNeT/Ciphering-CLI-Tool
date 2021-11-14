@@ -36,7 +36,8 @@ For example, config "C1-C1-R0-A" means "encode by Caesar cipher => encode by Cae
 
 If the input file option is missed, then you should provide text in command line.
 
-If the output file option is missed, then tool will output proceded text to command line
+If the output file option is missed, then tool will output proceded text to command line.
+
 You can terminate tool by pressing Ctrl+C.
 
 ---
