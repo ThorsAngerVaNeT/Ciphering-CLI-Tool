@@ -33,4 +33,4 @@ const getValue = (flag) => {
   return flagIndex !== -1 ? process.argv[flagIndex + 1] : null;
 }
 
-module.exports = { isArgsOk }
+module.exports = { isArgsOk, getValue }
