@@ -4,7 +4,8 @@
   "description": "NodeJS RS School 2021Q4 Task 1 - Caesar Cipher CLI",
   "main": "caesar-cli.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "test:coverage": "jest --coverage"
   },
   "repository": {
     "type": "git",
@@ -20,5 +21,8 @@
   "bugs": {
     "url": "https://github.com/ThorsAngerVaNeT/Node.JS-RS-School-2021Q4/issues"
   },
-  "homepage": "https://github.com/ThorsAngerVaNeT/Node.JS-RS-School-2021Q4#readme"
+  "homepage": "https://github.com/ThorsAngerVaNeT/Node.JS-RS-School-2021Q4#readme",
+  "devDependencies": {
+    "jest": "^27.3.1"
+  }
 }
