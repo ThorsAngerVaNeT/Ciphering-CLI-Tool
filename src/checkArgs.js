@@ -26,6 +26,7 @@ const isArgsOk = () => {
   if(!configArr.every(el => (allowedConfig.includes(el)))){
     throw new IncorrectConfigError();
   }
+  return true;
 }
 
 const getValue = (flag) => {
