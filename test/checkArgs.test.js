@@ -5,12 +5,17 @@ beforeEach(() => {
   process.argv = [process.execPath, path.resolve('./..', 'caesar-cli.js')]
 });
 
+test('should correct config with mocking function', () => {
+  process.argv.push('-c', 'C1-C1-A-R0-');
+  const correctConfig = jest.fn(() => process.argv[3] = process.argv[3].slice(0, -1));
+  correctConfig();
+  expect(isArgsOk()).toBe(true);
+});
+
 describe('Caesar Cipher CLI checkArgs Module', () => {
   describe('isArgsOk Unit Tests', () => {
     //There are unit tests, to check tests from task2 decription see caesar-cli.test.js
     test('should throw error Duplicated options are not allowed', () => {    
-      process.argv.push('-c', 'C1-C1-A-R0', '--config', 'C0');
-      expect(isArgsOk).toThrowError(/Duplicated options are not allowed/);
     });
 
     test('should throw error Missing required argument -c (--config)', () => {
