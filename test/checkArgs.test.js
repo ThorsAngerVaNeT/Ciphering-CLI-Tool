@@ -8,7 +8,9 @@ beforeEach(() => {
 describe('Caesar Cipher CLI checkArgs Module', () => {
   describe('isArgsOk Unit Tests', () => {
     //There are unit tests, to check tests from task2 decription see caesar-cli.test.js
-    test('should throw error Duplicated options are not allowed', () => {    
+    test('should throw error Duplicated options are not allowed', () => {
+      process.argv.push('-c', 'C1-C1-A-R0', '--config', 'C0');
+      expect(checkArgs.isArgsOk).toThrowError("Duplicated options are not allowed!");
     });
 
     test('should throw error Missing required argument -c (--config)', () => {
