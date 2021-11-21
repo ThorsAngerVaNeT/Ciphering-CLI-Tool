@@ -1,5 +1,5 @@
 const path = require("path");
-const { isArgsOk, getValue } = require('../src/checkArgs.js');
+const checkArgs = require('../src/checkArgs.js');
 
 beforeEach(() => {
   process.argv = [process.execPath, path.resolve('./..', 'caesar-cli.js')]
@@ -7,9 +7,18 @@ beforeEach(() => {
 
 test('should correct config with mocking function', () => {
   process.argv.push('-c', 'C1-C1-A-R0-');
-  const correctConfig = jest.fn(() => process.argv[3] = process.argv[3].slice(0, -1));
-  correctConfig();
-  expect(isArgsOk()).toBe(true);
+  checkArgs.getValue = jest.fn((arg) => {
+    const flagIndex = process.argv.indexOf(arg);
+    let argVal = flagIndex !== -1 ? process.argv[flagIndex + 1] : null;
+    if(argVal.substring(argVal.length-1) == "-"){
+      argVal = argVal.slice(0, -1);
+      process.argv[flagIndex + 1] = argVal;
+    }
+    return argVal;
+  });
+  
+  expect(checkArgs.getValue('-c')).toBe('C1-C1-A-R0');
+  expect(checkArgs.isArgsOk()).toBe(true);
 });
 
 describe('Caesar Cipher CLI checkArgs Module', () => {
@@ -19,34 +28,34 @@ describe('Caesar Cipher CLI checkArgs Module', () => {
     });
 
     test('should throw error Missing required argument -c (--config)', () => {
-      expect(isArgsOk).toThrowError("Missing required argument: -c (--config)");
+      expect(checkArgs.isArgsOk).toThrowError("Missing required argument: -c (--config)");
     });
 
     test('should throw error Incorrect config definition', () => {
       process.argv.push('-c', 'C1-C1-A-R0-');
-      expect(isArgsOk).toThrowError(/Incorrect config definition/);
+      expect(checkArgs.isArgsOk).toThrowError(/Incorrect config definition/);
     });
     
     test('should pass test because config is valid', () => {
       process.argv.push('--config', 'C1-C1-A-R0');
-      expect(isArgsOk()).toBe(true);
+      expect(checkArgs.isArgsOk()).toBe(true);
     });
   });
 
   describe('getValue Unit Tests', () => {
     test('should return C1-C1-A-R0', () => {
       process.argv.push('-c', 'C1-C1-A-R0');
-      expect(getValue('-c')).toEqual('C1-C1-A-R0');
+      expect(checkArgs.getValue('-c')).toEqual('C1-C1-A-R0');
     });
 
     test('should return C1', () => {
       process.argv.push('-c', 'C1');
-      expect(getValue('-c')).toEqual('C1');
+      expect(checkArgs.getValue('-c')).toEqual('C1');
     });
 
     test('should return null', () => {
       process.argv.push('-c', 'C1-C1-A-R0');
-      expect(getValue('-i')).toEqual(null);
+      expect(checkArgs.getValue('-i')).toEqual(null);
     });
   });
 });
