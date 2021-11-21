@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/ThorsAngerVaNeT/Node.JS-RS-School-2021Q4#readme",
   "devDependencies": {
+    "concat-stream": "^2.0.0",
     "jest": "^27.3.1"
   }
 }
