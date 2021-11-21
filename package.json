@@ -4,8 +4,8 @@
   "description": "NodeJS RS School 2021Q4 Task 1 - Caesar Cipher CLI",
   "main": "caesar-cli.js",
   "scripts": {
-    "test": "jest",
-    "test:coverage": "jest --coverage"
+    "test": "jest --verbose",
+    "test:coverage": "jest --verbose --coverage"
   },
   "repository": {
     "type": "git",
