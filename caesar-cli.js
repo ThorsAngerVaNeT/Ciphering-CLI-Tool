@@ -3,7 +3,6 @@ const fs = require('fs');
 const { pipeline } = require('stream');
 const checkArgs = require('./src/checkArgs.js');
 const {myReadable, myWritable, CTransform, RTransform, ATransform} = require('./src/streams.js');
-const {FileIOError} = require('./src/errors.js');
 
 try {
   checkArgs.isArgsOk();

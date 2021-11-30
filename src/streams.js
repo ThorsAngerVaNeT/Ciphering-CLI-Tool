@@ -9,14 +9,20 @@ class myReadable extends Readable {
     this.fd = null;
   }
   _construct(callback) {
-    fs.open(this.filename,'r', (err, fd) => {
-      if (err) {
-        callback(err);
-      } else {
-        this.fd = fd;
-        callback();
-      }
-    });
+    if (fs.existsSync(this.filename)){
+      fs.open(this.filename,'r', (err, fd) => {
+        if (err) {
+          callback(err);
+        } else {
+          this.fd = fd;
+          callback();
+        }
+      });
+    }
+    else{      
+      callback(new Error(`Input file doesn't exist!`));
+    }
+    
   }
   _read(n) {
     const buf = Buffer.alloc(n);
@@ -43,14 +49,19 @@ class myWritable extends Writable {
     this.filename = filename;
   }
   _construct(callback) {
-    fs.open(this.filename, 'a', (err, fd) => {
-      if (err) {
-        callback(err);
-      } else {
-        this.fd = fd;
-        callback();
-      }
-    });
+    if (fs.existsSync(this.filename)){
+      fs.open(this.filename, 'a', (err, fd) => {
+        if (err) {
+          callback(err);
+        } else {
+          this.fd = fd;
+          callback();
+        }
+      });
+    }
+    else{      
+      callback(new Error(`Output file doesn't exist!`));
+    }
   }
   _write(chunk, encoding, callback) {
     fs.write(this.fd, chunk, callback);

@@ -25,10 +25,5 @@ class IncorrectConfigError extends ValidationError {
     super("Incorrect config definition!");
   }
 }
-class FileIOError extends ValidationError {
-  constructor() {
-    super("No such file or directory!");
-  }
-}
 
-module.exports = {ArgRequiredError, ArgDuplicateError, IncorrectConfigError, FileIOError}
+module.exports = {ArgRequiredError, ArgDuplicateError, IncorrectConfigError}
